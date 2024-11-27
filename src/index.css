@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Animated background with rays */
+.bg-rays {
+  background: radial-gradient(circle at 50% -20%, #0A1A3F, #060C1D);
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-rays::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    linear-gradient(45deg, transparent 45%, #FFD700 48%, transparent 51%),
+    linear-gradient(-45deg, transparent 45%, #FFD700 48%, transparent 51%);
+  background-size: 200% 200%;
+  opacity: 0.03;
+  animation: rayEffect 8s linear infinite;
+}
+
+@keyframes rayEffect {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 200% 200%;
+  }
+}
+
+/* Glowing effect for cards */
+.glow-effect {
+  position: relative;
+}
+
+.glow-effect::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(45deg, #FFD700 0%, transparent 40%, transparent 60%, #FFD700 100%);
+  border-radius: inherit;
+  z-index: -1;
+  animation: glowRotate 4s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.glow-effect:hover::after {
+  opacity: 0.15;
+}
+
+@keyframes glowRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Premium card background */
+.premium-card-bg {
+  background: linear-gradient(135deg, #0A1A3F 0%, #060C1D 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.premium-card-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+              rgba(255, 215, 0, 0.15) 0%, 
+              transparent 25%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.premium-card-bg:hover::before {
+  opacity: 1;
+}
